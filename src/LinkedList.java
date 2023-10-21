@@ -60,9 +60,23 @@ public class LinkedList
          * which points to the first element of the reversed linked list
          */
 
+        if (head.next == null || (head.next).next == null){
+            return;
+        }
+        tail = head.next;
+        Link previousNode = head.next;
+        Link currentNode = previousNode.next;
+        Link nextNode = currentNode.next;
+        currentNode.next = previousNode;
+        previousNode.next = null;
+        while(nextNode != null){
+            previousNode = currentNode;
+            currentNode = nextNode;
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+        }
         Link newHead = new Link();
-        Link firstElement = new Link(42);
-        newHead.next = firstElement;
+        newHead.next = currentNode;
         head = newHead;
     }
 
